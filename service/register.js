@@ -21,7 +21,6 @@ async function register(username, password, role) {
   return {
       status: 200,
       message: "welcome to our system",
-      newUser
   }
 }
 export default register;
