@@ -1,7 +1,6 @@
 
 async function adminCheck(req, res, next) {
     const {role} = req.params
-    console.log(role);
   if (role !== "admin") {
     return res.status(401).json("Unauthorized");
   } else {

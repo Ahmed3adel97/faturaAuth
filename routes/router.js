@@ -8,9 +8,12 @@ const router = express.Router();
 
 router.post("/register", registerController);
 router.post("/login", loginController);
+
 // Protected routes
 // ------------------------------------------------------------------
 
 router.get("/viewProfie/:role", adminCheck, authenticate, viewProfieController);
+router.get("/viewProfie/:role", userCheck, authenticate, viewProfieController);
+
 
 export default router;

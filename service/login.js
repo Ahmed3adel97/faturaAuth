@@ -1,6 +1,8 @@
 import bcrypt from "bcrypt";
 import User from "../models/user.js";
 import jwt from "jsonwebtoken";
+import dotenv from "dotenv";
+dotenv.config();
 
 async function login(username, password) {
   const oldUser = await User.findOne({ username }).lean();
@@ -17,18 +19,20 @@ async function login(username, password) {
       message: "wrong password",
     };
   }
+  const secret = process.env.SECRET;
+
   let token = jwt.sign(
     {
       user_id: oldUser._id,
       role: oldUser.role,
       username: oldUser.username,
     },
-    "qwertyuiop123",
+    secret,
     { expiresIn: "7 days" }
   );
   return {
     status: 200,
-    token
+    token,
   };
 }
 
